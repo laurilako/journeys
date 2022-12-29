@@ -62,4 +62,14 @@ const journeySchema = new mongoose.Schema({
 
 const Journey = mongoose.model('Journey', journeySchema);
 
+// remove _v and _id to id from json
+
+journeySchema.set('toJSON', {
+    transform: (document, returnedObject) => {
+      returnedObject.id = returnedObject._id.toString()
+      delete returnedObject._id
+      delete returnedObject.__v
+    }
+})
+
 module.exports = Journey;

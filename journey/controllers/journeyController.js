@@ -1,5 +1,30 @@
 const Journey = require('../models/journeyModel');
 
+// Get one from /api/journeys/:id
+const getJourney = async (req, res) => {
+    try {
+        const journey = await Journey.findById(req.params.id);
+        res.json(journey);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+// Delete one from /api/journeys/:id
+const deleteJourney = async (req, res) => {
+    try {
+        const journey = await Journey.findById(req.params.id);
+        if (journey == null) {
+            return res.status(404).json({ message: 'Cannot find journey' });
+        }
+        await journey.remove();
+        res.json({ message: 'Deleted journey' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+// Get all from /api/journeys
 const getJourneys = async (req, res) => {
     try {
         const journeys = await Journey.find();
@@ -9,6 +34,7 @@ const getJourneys = async (req, res) => {
     }
 };
 
+// Create new journey
 const createJourney = async (req, res) => {
     const journey = new Journey({
         departure: req.body.departure,
@@ -31,5 +57,7 @@ const createJourney = async (req, res) => {
 
 module.exports = {
     getJourneys,
+    getJourney,
+    deleteJourney,
     createJourney,
 };
