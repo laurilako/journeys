@@ -85,6 +85,7 @@ function App() {
             <Routes>
               <Route exact path="/" element={<JourneyList journeys={journeys} />} />
               <Route path="/stations" element={<StationList stations={stations} />} />
+              {/* <Route path="/stations/:id" element={<SingleStation journeys={stations} stations={stations} />} /> */}
             </Routes>
           </Sidebar>
       </BrowserRouter>
