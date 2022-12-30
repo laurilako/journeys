@@ -18,12 +18,13 @@ import {
   FiMenu,
 } from 'react-icons/fi';
 import { BiTrain } from 'react-icons/bi';
+import { NavLink } from 'react-router-dom';
 
 
 const LinkItems = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Journeys', icon: FiCompass },
-  { name: 'Stations', icon: BiTrain }
+  // { name: 'Home', icon: FiHome, path: '/' },
+  { name: 'Journeys', icon: FiCompass, path: '/' },
+  { name: 'Stations', icon: BiTrain, path: '/stations' },
 ];
 
 export default function SimpleSidebar({ children }) {
@@ -72,7 +73,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem key={link.name} icon={link.icon} path={link.path}>
           {link.name}
         </NavItem>
       ))}
@@ -80,9 +81,9 @@ const SidebarContent = ({ onClose, ...rest }) => {
   );
 };
 
-const NavItem = ({ icon, children, ...rest }) => {
+const NavItem = ({ icon, children, path, ...rest }) => {
   return (
-    <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+    <NavLink to={path} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
       <Flex
         align="center"
         p="4"
@@ -107,7 +108,7 @@ const NavItem = ({ icon, children, ...rest }) => {
         )}
         {children}
       </Flex>
-    </Link>
+    </NavLink>
   );
 };
 
