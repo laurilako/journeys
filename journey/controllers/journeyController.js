@@ -27,7 +27,7 @@ const deleteJourney = async (req, res) => {
 // Get all from /api/journeys
 const getJourneys = async (req, res) => {
     try {
-        const journeys = await Journey.find().limit(100);
+        const journeys = await Journey.find();
         res.json(journeys);
     } catch (err) {
         res.status(500).json({ message: err.message });
