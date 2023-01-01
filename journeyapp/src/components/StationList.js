@@ -34,7 +34,7 @@ export default function StationList({ stations }) {
         <>
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
-                <ModalContent>
+                <ModalContent alignItems={'center'}>
                     <SingleStation stations={stations} id={id} />
                     <ModalFooter justifyContent={'center'}>
                         <Button colorScheme="blue" mr={3} onClick={onClose}>

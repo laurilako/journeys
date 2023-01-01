@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
+import Home from './components/Home';
 import JourneyList from './components/JourneyList';
 import StationList from './components/StationList';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-    
+
   const [journeys, setJourneys] = useState([]);
   const [stations, setStations] = useState([]);
 
@@ -47,7 +48,8 @@ function App() {
       <BrowserRouter>
           <Sidebar>
             <Routes>
-              <Route exact path="/" element={<JourneyList journeys={journeys} />} />
+              <Route exact path="/" element={<Home />} />
+              <Route path="/journeys" element={<JourneyList journeys={journeys} />} />
               <Route path="/stations" element={<StationList stations={stations} />} />
             </Routes>
           </Sidebar>

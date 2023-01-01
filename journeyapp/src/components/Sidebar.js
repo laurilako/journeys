@@ -15,12 +15,13 @@ import {
   FiCompass,
   FiMenu,
 } from 'react-icons/fi';
-import { BiTrain } from 'react-icons/bi';
+import { BiHome, BiTrain } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
 
 
 const LinkItems = [
-  { name: 'Journeys', icon: FiCompass, path: '/' },
+  { name: 'Home', icon: BiHome, path: '/'},
+  { name: 'Journeys', icon: FiCompass, path: '/journeys' },
   { name: 'Stations', icon: BiTrain, path: '/stations' },
 ];
 

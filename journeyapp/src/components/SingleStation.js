@@ -30,7 +30,7 @@ const SingleStation = ({ stations, id }) => {
 
     return (
         <>
-            <Card align='center' maxW={'sm'} overflow='hidden' variant='outline'>
+            <Card align='center' overflow='hidden' variant='outline'>
                 <Stat>
                     <StatLabel>Station: <StatNumber>{station.name}</StatNumber></StatLabel>
                     <StatHelpText>Number of started journeys: <StatNumber>{stationData.departureStationCount}</StatNumber></StatHelpText>
