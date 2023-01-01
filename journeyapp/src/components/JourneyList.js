@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
     Heading,
     Table,
@@ -10,23 +10,9 @@ import {
     Box,
   } from "@chakra-ui/react";
 
-// example journey data in JSON
-// {
-//     "departure": "2021-05-31T23:57:25",
-//     "return": "2021-06-01T00:05:46",
-//     "departureStationId": "094",
-//     "departureStationName": "Laajalahden aukio",
-//     "returnStationId": "100",
-//     "returnStationName": "Teljäntie",
-//     "coveredDistance": "2043",
-//     "duration": "500",
-//     "id": "63addbadcd8bc3234e10250c"
-// }
 
-
-
+// List of journeys
 export default function JourneyList({ journeys }) {
-
     return (
         <>
             <Box padding={4}>

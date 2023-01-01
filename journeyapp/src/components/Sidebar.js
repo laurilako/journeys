@@ -6,14 +6,12 @@ import {
   Flex,
   Icon,
   useColorModeValue,
-  Link,
   Drawer,
   DrawerContent,
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
 import {
-  FiHome,
   FiCompass,
   FiMenu,
 } from 'react-icons/fi';
@@ -22,11 +20,11 @@ import { NavLink } from 'react-router-dom';
 
 
 const LinkItems = [
-  // { name: 'Home', icon: FiHome, path: '/' },
   { name: 'Journeys', icon: FiCompass, path: '/' },
   { name: 'Stations', icon: BiTrain, path: '/stations' },
 ];
 
+// Sidebar, mobile and desktop from Chakra UI docs, modified
 export default function SimpleSidebar({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -73,7 +71,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} path={link.path}>
+        <NavItem key={link.name} onClick={onClose} icon={link.icon} path={link.path}>
           {link.name}
         </NavItem>
       ))}
