@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import {
     Heading,
     Table,
+    Text,
     Thead,
     Tbody,
     Tr,
@@ -25,9 +26,10 @@ export default function JourneyList({ journeys }) {
 
     return (
         <>      
-                <Box padding={4}>
+                <Box borderWidth={'2px'} borderRadius='lg' padding={4}>
                         <Heading mb='5'>LIST OF JOURNEYS</Heading>
-                        <Box h='md' overflowY="auto">
+                        <Text>Showing {currentJourneys.length} of {journeys.length} journeys</Text>
+                        <Box h='70vh' overflowY="auto">
                         <Table size='sm' variant="striped" colorScheme="red">
                             <Thead position='sticky' top={0} zIndex={'docked'} bg="#dadaff">
                                 <Tr>

@@ -3,6 +3,7 @@ import {
     Heading,
     Table,
     Thead,
+    Text,
     Tbody,
     Tr,
     Th,
@@ -25,8 +26,10 @@ export default function StationList({ stations }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [id, setId] = useState('')
 
-    const handleClick = (id) => {
-        setId(id)
+    console.log('stations', stations)
+
+    const handleClick = (stationId) => {
+        setId(stationId)
         onOpen()
     }
 
@@ -46,19 +49,20 @@ export default function StationList({ stations }) {
 
             <Box borderWidth={'2px'} borderRadius='lg' padding={4}>
                     <Heading mb='5'>LIST OF STATIONS</Heading>
-                    <Box overflowY="auto" maxHeight="600px">
-                    <Table size='sm' variant='striped' colorScheme="green">
+                    <Text>Showing {stations.length} stations</Text>
+                    <Box h='70vh' overflowY="auto">
+                        <Table size='sm' variant="striped" colorScheme="twitter">
                         <Thead position='sticky' top={0} zIndex={'docked'} bg="#dadaff">
                             <Tr>
                                 <Th>Station</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
-                        {stations.map(({ id, name }) => (
-                            <Tr key={id}>
+                        {stations.map(({ stationId, name }) => (
+                            <Tr key={stationId}>
                                 <Td alignItems={'center'}>
                                     {name}
-                                    <IconButton icon={<Icon as={FiInfo} />} colorScheme='teal' variant='ghost' onClick={() => handleClick(id)}></IconButton>
+                                    <IconButton icon={<Icon as={FiInfo} />} colorScheme='teal' variant='ghost' onClick={() => handleClick(stationId)}></IconButton>
                                 </Td>
                             </Tr>
                         ))}

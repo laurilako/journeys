@@ -11,11 +11,13 @@ import { Card } from '@chakra-ui/react';
 const SingleStation = ({ stations, id }) => {  
     const [stationData, setStationData] = useState([]);
     
-    const station = stations.find(station => station.id === id);
+    const station = stations.find(station => station.stationId === id);
+
+    console.log("STATION", station)
 
     useEffect(() => {
         const fetchStation = async () => {
-            const response = await fetch(`http://localhost:3000/api/journeys/station/${station.id}`);
+            const response = await fetch(`http://localhost:3000/api/journeys/station/${station.stationId}`);
             const data = await response.json();
             console.log(data);
             setStationData(data);

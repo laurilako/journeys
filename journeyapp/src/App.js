@@ -23,25 +23,17 @@ function App() {
     }
   }, []);
 
-  // map each station only once from journeys
+  // fetch stations from backend only on first render
   useEffect(() => {
-    const mapStationsFromJourneys = (journeys) => {
-      // unique stations
-      const stations = journeys.reduce((o, journey) => {
-        const departureStation = {
-          id: journey.departureStationId,
-          name: journey.departureStationName
-        }
-        if(!o.find(station => station.id === departureStation.id)) {
-          o.push(departureStation);
-        }
-        return o;
-      }, []);
-      return stations;
+    const fetchStations = async () => {
+      const response = await fetch('http://localhost:3000/api/stations');
+      const data = await response.json();
+      setStations(data);
     }
-    const stations = mapStationsFromJourneys(journeys);
-    setStations(stations);
-  }, [journeys]);
+    if (stations.length === 0) {
+      fetchStations();
+    }
+  }, []);
 
   return (
     <div className="App">

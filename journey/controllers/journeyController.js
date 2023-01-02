@@ -57,7 +57,6 @@ const createJourney = async (req, res) => {
 
 // Get count of how many times a stations is used as departure station and return station
 const getStationData = async (req, res) => {
-    console.log(req.params.id)
     try {
         const departureStationCount = await Journey.find({"departureStationId" : req.params.id}).count();
         const returnStationCount = await Journey.find({"returnStationId" : req.params.id}).count();
