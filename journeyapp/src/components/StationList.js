@@ -9,15 +9,16 @@ import {
     Td,
     Box,
     Button,
-    ModalBody,
     ModalContent,
     IconButton,
     ModalFooter,
     Modal,
     useDisclosure,
     ModalOverlay,
+    Icon,
   } from "@chakra-ui/react";
 import SingleStation from "./SingleStation";
+import { FiInfo } from "react-icons/fi";
 
 // List of stations with a button to open a modal with more info about the station
 export default function StationList({ stations }) {
@@ -25,7 +26,6 @@ export default function StationList({ stations }) {
     const [id, setId] = useState('')
 
     const handleClick = (id) => {
-        console.log(id)
         setId(id)
         onOpen()
     }
@@ -37,18 +37,18 @@ export default function StationList({ stations }) {
                 <ModalContent alignItems={'center'}>
                     <SingleStation stations={stations} id={id} />
                     <ModalFooter justifyContent={'center'}>
-                        <Button colorScheme="blue" mr={3} onClick={onClose}>
+                        <Button colorScheme="blue" size={'sm'} onClick={onClose}>
                             Close
                         </Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>
 
-            <Box padding={4}>
+            <Box borderWidth={'2px'} borderRadius='lg' padding={4}>
                     <Heading mb='5'>LIST OF STATIONS</Heading>
                     <Box overflowY="auto" maxHeight="600px">
-                    <Table variant="striped" colorScheme="red">
-                        <Thead position='sticky' top={0} zIndex={'docked'} bg='red.200'>
+                    <Table size='sm' variant='striped' colorScheme="green">
+                        <Thead position='sticky' top={0} zIndex={'docked'} bg="#dadaff">
                             <Tr>
                                 <Th>Station</Th>
                             </Tr>
@@ -56,9 +56,9 @@ export default function StationList({ stations }) {
                         <Tbody>
                         {stations.map(({ id, name }) => (
                             <Tr key={id}>
-                                <Td>
+                                <Td alignItems={'center'}>
                                     {name}
-                                    <Button colorScheme='teal' variant='ghost' onClick={() => handleClick(id)}> More info </Button>
+                                    <IconButton icon={<Icon as={FiInfo} />} colorScheme='teal' variant='ghost' onClick={() => handleClick(id)}></IconButton>
                                 </Td>
                             </Tr>
                         ))}

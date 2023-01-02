@@ -1,10 +1,8 @@
 import { Button, Flex } from '@chakra-ui/react';
 import React from 'react';
-import { usePagination, DOTS } from './usePagination';
+import { usePagination } from './usePagination';
 
 const Pagination = ({ currentPage, totalCount, siblingCount=1, pageSize, onPageChange }) => {
-
-    console.log(currentPage, totalCount, siblingCount, pageSize, onPageChange)
 
     const paginationRange = usePagination({
         currentPage: currentPage,
@@ -12,8 +10,6 @@ const Pagination = ({ currentPage, totalCount, siblingCount=1, pageSize, onPageC
         siblingCount: siblingCount,
         pageSize: pageSize,
     });
-
-    console.log("ASDASD", paginationRange)
 
     // if less than 2 times in range, don't show pagination
     if (currentPage === 0 || paginationRange.length < 2) {

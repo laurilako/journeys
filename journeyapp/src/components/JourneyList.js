@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
     Heading,
     Table,
@@ -8,6 +8,7 @@ import {
     Th,
     Td,
     Box,
+    Spinner,
   } from "@chakra-ui/react";
 import Pagination from './Pagination';
 
@@ -20,15 +21,15 @@ export default function JourneyList({ journeys }) {
         const firstPageIndex = (currentPage - 1) * pageSize;
         const lastPageIndex = firstPageIndex + pageSize;
         return journeys.slice(firstPageIndex, lastPageIndex);
-    }, [currentPage]);
+    }, [currentPage, journeys]);
 
     return (
         <>      
                 <Box padding={4}>
                         <Heading mb='5'>LIST OF JOURNEYS</Heading>
-                        <Box overflowY="auto">
-                        <Table variant="striped" colorScheme="red">
-                            <Thead position='sticky' top={0} zIndex={'docked'} bg='red.200'>
+                        <Box h='md' overflowY="auto">
+                        <Table size='sm' variant="striped" colorScheme="red">
+                            <Thead position='sticky' top={0} zIndex={'docked'} bg="#dadaff">
                                 <Tr>
                                     <Th>Departure Station</Th>
                                     <Th>Return Station</Th>
@@ -37,7 +38,10 @@ export default function JourneyList({ journeys }) {
                                 </Tr>
                             </Thead>
                             <Tbody>
-                            {currentJourneys.map(({ departureStationName, returnStationName, coveredDistance, duration, id }) => (
+                            {journeys.length === 0 ? 
+                            <Heading mt={'4'} display='flex' size='md' textAlign='center'>Fetching journeys <Spinner ml={'2'} /></Heading>
+                            : 
+                            currentJourneys.map(({ departureStationName, returnStationName, coveredDistance, duration, id }) => (
                                 <Tr key={id}>
                                     <Td>{departureStationName}</Td>
                                     <Td>{returnStationName}</Td>
@@ -45,6 +49,7 @@ export default function JourneyList({ journeys }) {
                                     <Td>{(duration / 60).toFixed(2)}</Td>
                                 </Tr>
                             ))}
+
                             </Tbody>
                         </Table>
                     </Box>
