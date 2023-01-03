@@ -64,12 +64,30 @@ const createJourney = async (req, res) => {
     }
 }
 
-// Get count of how many times a stations is used as departure station and return station
+// Get count of how many times a stations is used as departure station and return station and average duration and distance
 const getStationData = async (req, res) => {
     try {
-        const departureStationCount = await Journey.find({"departureStationId" : req.params.id}).count();
-        const returnStationCount = await Journey.find({"returnStationId" : req.params.id}).count();
-        res.json({departureStationCount, returnStationCount});
+        const departureStation = await Journey.find({"departureStationId" : req.params.id});
+        const returnStation = await Journey.find({"returnStationId" : req.params.id});
+        const departureStationCount = departureStation.length;
+        const returnStationCount = returnStation.length;
+        let departureStationDuration = 0;
+        let departureStationDistance = 0;
+        let returnStationDuration = 0;
+        let returnStationDistance = 0;
+        departureStation.forEach(journey => {
+            departureStationDuration += Number(journey.duration);
+            departureStationDistance += Number(journey.coveredDistance);
+        });
+        returnStation.forEach(journey => {
+            returnStationDuration += Number(journey.duration);
+            returnStationDistance += Number(journey.coveredDistance);
+        });
+        departureStationDuration = Number(departureStationDuration/1000/departureStationCount).toFixed(2);
+        departureStationDistance = Number(departureStationDistance/1000/departureStationCount).toFixed(2);
+        returnStationDuration = Number(returnStationDuration/1000/returnStationCount).toFixed(2);
+        returnStationDistance = Number(returnStationDistance/1000/returnStationCount).toFixed(2);
+        res.json({ departureStationCount, returnStationCount, departureStationDuration, departureStationDistance, returnStationDuration, returnStationDistance });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
