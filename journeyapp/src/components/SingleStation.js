@@ -4,41 +4,50 @@ import {
     StatLabel,
     StatNumber,
     StatHelpText,
+    Spinner,
+    StatGroup,
+    Heading,
   } from '@chakra-ui/react'
 import { Card } from '@chakra-ui/react';
 
 // Component to show the number of started and ended journeys at a station
 const SingleStation = ({ stations, id }) => {  
-    const [stationData, setStationData] = useState([]);
+    const [stationJourneyData, setStationJourneyData] = useState([]);
     
     const station = stations.find(station => station.stationId === id);
 
-    console.log("STATION", station)
-
     useEffect(() => {
-        const fetchStation = async () => {
+        const fetchStationJourneyData = async () => {
             const response = await fetch(`http://localhost:3000/api/journeys/station/${station.stationId}`);
             const data = await response.json();
-            console.log(data);
-            setStationData(data);
+            setStationJourneyData(data);
         }
-        if (stationData.length === 0) {
-            fetchStation();
+        if (stationJourneyData.length === 0) {
+            fetchStationJourneyData();
         }
-        console.log(station)
-        console.log("STATIONDATA", stationData)
-        fetchStation();
+        fetchStationJourneyData();
     }, [])
+
+    // TODO: Add a loading spinner
+    if (stationJourneyData.length === 0) {
+        return <Spinner>Loading...</Spinner>
+    }
+
+    // TODO: Style the card
 
     return (
         <>
-            <Card border={'none'} align='center' overflow='hidden' variant='outline'>
+            <Heading fontSize={'15'}>{station.name}, {station.osoite}, {station.kaupunki}</Heading>
+            <StatGroup>
                 <Stat>
-                    <StatLabel><StatNumber>{station.name}</StatNumber></StatLabel>
-                    <StatHelpText><StatNumber>{stationData.departureStationCount}</StatNumber> Journeys started from here</StatHelpText>
-                    <StatHelpText><StatNumber>{stationData.returnStationCount}</StatNumber> Journeys ended here</StatHelpText>
+                    <StatLabel mt='2'>Journeys started</StatLabel>
+                    <StatNumber>{stationJourneyData.departureStationCount}</StatNumber>
                 </Stat>
-            </Card>
+                <Stat>
+                    <StatLabel mt='2'>Journeys ended</StatLabel>
+                    <StatNumber>{stationJourneyData.returnStationCount}</StatNumber>
+                </Stat>
+            </StatGroup>
         </> 
     )
 }

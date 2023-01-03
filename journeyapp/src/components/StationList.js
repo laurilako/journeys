@@ -19,15 +19,12 @@ import {
     Icon,
   } from "@chakra-ui/react";
 import SingleStation from "./SingleStation";
-import { FiInfo } from "react-icons/fi";
+import TableComponent from './TableComponent';
 
 // List of stations with a button to open a modal with more info about the station
 export default function StationList({ stations }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [id, setId] = useState('')
-
-    console.log('stations', stations)
-
     const handleClick = (stationId) => {
         setId(stationId)
         onOpen()
@@ -37,10 +34,10 @@ export default function StationList({ stations }) {
         <>
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
-                <ModalContent alignItems={'center'}>
+                <ModalContent bg={'white'} padding={'5'}>
                     <SingleStation stations={stations} id={id} />
                     <ModalFooter justifyContent={'center'}>
-                        <Button colorScheme="blue" size={'sm'} onClick={onClose}>
+                        <Button bgColor={'#dadaff'} size={'sm'} onClick={onClose}>
                             Close
                         </Button>
                     </ModalFooter>
@@ -51,23 +48,12 @@ export default function StationList({ stations }) {
                     <Heading mb='5'>LIST OF STATIONS</Heading>
                     <Text>Showing {stations.length} stations</Text>
                     <Box h='70vh' overflowY="auto">
-                        <Table size='sm' variant="striped" colorScheme="twitter">
-                        <Thead position='sticky' top={0} zIndex={'docked'} bg="#dadaff">
-                            <Tr>
-                                <Th>Station</Th>
-                            </Tr>
-                        </Thead>
-                        <Tbody>
-                        {stations.map(({ stationId, name }) => (
-                            <Tr key={stationId}>
-                                <Td alignItems={'center'}>
-                                    {name}
-                                    <IconButton icon={<Icon as={FiInfo} />} colorScheme='teal' variant='ghost' onClick={() => handleClick(stationId)}></IconButton>
-                                </Td>
-                            </Tr>
-                        ))}
-                        </Tbody>
-                    </Table>
+                    <TableComponent 
+                        headers={['Station', '']}
+                        columns={['name', 'stationId']}
+                        rows={stations}
+                        buttons={[{icon: 'FiInfo', colorScheme: 'teal', variant: 'ghost', onClick: handleClick}]}
+                    />
                 </Box>
             </Box>
         </>

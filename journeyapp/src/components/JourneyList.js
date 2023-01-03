@@ -12,9 +12,11 @@ import {
     Spinner,
   } from "@chakra-ui/react";
 import Pagination from './Pagination';
+import TableComponent from './TableComponent';
 
 // List of journeys
 export default function JourneyList({ journeys }) {
+
     const [currentPage, setCurrentPage] = useState(1);
     let pageSize = 100;
 
@@ -30,7 +32,28 @@ export default function JourneyList({ journeys }) {
                         <Heading mb='5'>LIST OF JOURNEYS</Heading>
                         <Text>Showing {currentJourneys.length} of {journeys.length} journeys</Text>
                         <Box h='70vh' overflowY="auto">
-                        <Table size='sm' variant="striped" colorScheme="red">
+                        {journeys.length === 0 ? (<span >Fetching data...<Spinner mt='4px' ml={'4px'} /></span> ):
+                        <TableComponent
+                            headers={['Departure Station', 'Return Station', 'Covered Distance (km)', 'Duration (min)']}
+                            columns={['departureStationName', 'returnStationName', 'coveredDistance', 'duration']}
+                            rows={currentJourneys}
+                        />
+                        }   
+                        </Box>
+                        <Box mt='5' display='flex' justifyContent={'center'}>
+                            {journeys.length === 0 ? null : 
+                            <Pagination
+                            currentPage={currentPage}
+                            totalCount={journeys.length}
+                            pageSize={pageSize}
+                            onPageChange={page => setCurrentPage(page)}
+                            />}
+                    </Box>
+                </Box>
+        </>
+        )
+
+                        {/* <Table size='sm' variant="striped" colorScheme="red">
                             <Thead position='sticky' top={0} zIndex={'docked'} bg="#dadaff">
                                 <Tr>
                                     <Th>Departure Station</Th>
@@ -40,9 +63,7 @@ export default function JourneyList({ journeys }) {
                                 </Tr>
                             </Thead>
                             <Tbody>
-                            {journeys.length === 0 ? 
-                            <Heading mt={'4'} display='flex' size='md' textAlign='center'>Fetching journeys <Spinner ml={'2'} /></Heading>
-                            : 
+                        
                             currentJourneys.map(({ departureStationName, returnStationName, coveredDistance, duration, id }) => (
                                 <Tr key={id}>
                                     <Td>{departureStationName}</Td>
@@ -53,19 +74,9 @@ export default function JourneyList({ journeys }) {
                             ))}
 
                             </Tbody>
-                        </Table>
-                    </Box>
-                    <Box mt='5' display='flex' justifyContent={'center'}>
-                        {journeys.length === 0 ? null : 
-                        <Pagination
-                            currentPage={currentPage}
-                            totalCount={journeys.length}
-                            pageSize={pageSize}
-                            onPageChange={page => setCurrentPage(page)}
-                        />
-                        }
+                        </Table> 
                     </Box>
                 </Box>
         </>
-    );
+                    */}
 }
