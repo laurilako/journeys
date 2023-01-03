@@ -4,6 +4,11 @@ const Journey = require('../models/journeyModel');
 const getJourney = async (req, res) => {
     try {
         const journey = await Journey.findById(req.params.id);
+        if (journey == null) {
+            return res.status(404).json({ message: 'Cannot find journey' });
+        }
+        journey.coveredDistance = Number((journey.coveredDistance)/1000).toFixed(2);
+        journey.duration = Number((journey.duration)/60).toFixed(2);
         res.json(journey);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -28,6 +33,10 @@ const deleteJourney = async (req, res) => {
 const getJourneys = async (req, res) => {
     try {
         const journeys = await Journey.find();
+        journeys.forEach(journey => {
+            journey.coveredDistance = Number((journey.coveredDistance)/1000).toFixed(2);
+            journey.duration = Number((journey.duration)/60).toFixed(2);
+        });
         res.json(journeys);
     } catch (err) {
         res.status(500).json({ message: err.message });
