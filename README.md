@@ -1,13 +1,14 @@
 # Journeys
-# Journeys app for Solita rekry
 
-## Prerequisites: 
+## Journeys app
 
-## Configurations:
+### Prerequisites: 
 
-## Tests:
+### Configurations:
 
-## Technology choices:
+### Tests:
+
+### Technology choices:
 Node.JS (Express), MongoDB
 
 React
