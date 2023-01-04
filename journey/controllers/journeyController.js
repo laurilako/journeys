@@ -64,7 +64,7 @@ const createJourney = async (req, res) => {
     }
 }
 
-// Get count of how many times a stations is used as departure station and return station and average duration and distance
+// Get station data from /api/journeys/station/:id
 const getStationData = async (req, res) => {
     try {
         const departureStation = await Journey.find({"departureStationId" : req.params.id});

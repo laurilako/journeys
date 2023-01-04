@@ -53,6 +53,7 @@ const journeySchema = new mongoose.Schema({
     duration: {
         type: String,
         required: true,
+        // check if duration as int is greater than 10
         validate: (value) => {
             if(parseInt(value) >= 10) return true;
             else throw new Error("duration is not greater than 10 sec");
@@ -63,7 +64,6 @@ const journeySchema = new mongoose.Schema({
 const Journey = mongoose.model('Journey', journeySchema);
 
 // remove _v and _id to id from json
-
 journeySchema.set('toJSON', {
     transform: (document, returnedObject) => {
       returnedObject.id = returnedObject._id.toString()
