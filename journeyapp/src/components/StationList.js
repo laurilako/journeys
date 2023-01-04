@@ -1,23 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-    Heading,
-    Table,
-    Thead,
-    Text,
-    Tbody,
-    Tr,
-    Th,
-    Td,
-    Box,
-    Button,
     ModalContent,
     IconButton,
     ModalFooter,
     Modal,
     useDisclosure,
     ModalOverlay,
-    Icon,
   } from "@chakra-ui/react";
+import { GrClose } from "react-icons/gr";  
 import SingleStation from "./SingleStation";
 import TableComponent from './TableComponent';
 
@@ -35,27 +25,22 @@ export default function StationList({ stations }) {
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent bg={'white'} padding={'5'}>
-                    <SingleStation stations={stations} id={id} />
-                    <ModalFooter justifyContent={'center'}>
-                        <Button bgColor={'#dadaff'} size={'sm'} onClick={onClose}>
-                            Close
-                        </Button>
+                    <ModalFooter mb='-5' mt='-5' mr='-6' justifyContent={'right'}>
+                        <IconButton icon={<GrClose />} bgColor={'#dadaff'} size={'sm'} onClick={onClose}>
+                        </IconButton>
                     </ModalFooter>
+                    <SingleStation stations={stations} id={id} />
                 </ModalContent>
             </Modal>
 
-            <Box borderWidth={'2px'} borderRadius='lg' padding={4}>
-                    <Heading mb='5'>LIST OF STATIONS</Heading>
-                    <Text>Showing {stations.length} stations</Text>
-                    <Box h='70vh' overflowY="auto">
-                    <TableComponent 
-                        headers={['Station', '']}
-                        columns={['name', 'stationId']}
-                        rows={stations}
-                        buttons={[{icon: 'FiInfo', colorScheme: 'teal', variant: 'ghost', onClick: handleClick}]}
-                    />
-                </Box>
-            </Box>
+            <TableComponent
+                searchableColumns={['name']}
+                heading='LIST OF STATIONS'
+                headers={['Station', 'More info']}
+                columns={['name', 'stationId']}
+                rows={stations}
+                buttons={[{icon: 'FiInfo', colorScheme: 'teal', variant: 'ghost', onClick: handleClick}]}
+                />
         </>
     );
 }

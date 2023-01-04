@@ -1,6 +1,6 @@
 import { Button, Flex } from '@chakra-ui/react';
 import React from 'react';
-import { usePagination } from './usePagination';
+import { usePagination } from '../util/usePagination';
 
 const Pagination = ({ currentPage, totalCount, siblingCount=1, pageSize, onPageChange }) => {
 
