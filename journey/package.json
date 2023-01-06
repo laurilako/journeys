@@ -1,9 +1,14 @@
 {
   "name": "journey",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend for Journey app",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
+    "build:ui": "rm -rf build && cd ../journeyapp && npm run build && cp -r build ../journey/",
+    "deploy": "git push heroku main",
+    "deploy:full": "npm run build:ui && git commit -m uibuild && git push && npm run deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Konsta Laurila",
