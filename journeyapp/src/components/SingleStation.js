@@ -20,7 +20,7 @@ const SingleStation = ({ stations, id }) => {
 
     useEffect(() => {
         const fetchStationJourneyData = async () => {
-            const response = await fetch(`/journeys/station/${station.stationId}`);
+            const response = await fetch(`/api/journeys/station/${station.stationId}`);
             const data = await response.json();
             setStationJourneyData(data);
         }
