@@ -2,33 +2,33 @@ import { Flex,
     Heading,
     Box,
     Text,
+    ButtonGroup,
+    Button,
+    Stack
 
 } from "@chakra-ui/react";
 import React from "react";
-
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { NavLink } from 'react-router-dom';
 
 const Home = () => {
     return (        
         <>
-            <Flex direction="column" align="center" justify="center" mt={'40px'}>
-                <Heading>Home</Heading>
-                <Text>View journeys</Text>
-                <Text>View stations</Text>            
-            </Flex>
-
-
-            <Flex direction="column" alignItems={'center'} justifyContent='space-around' wrap={'nowrap'} justify="center" h="70vh">
-                <Box border='1px'>
-                    <Heading>
-                        Add new journey
-                    </Heading>
-                </Box>
-                <Box border='1px'>
-                    <Heading>
-                        Add new station
-                    </Heading>
-                </Box>
+            <Flex direction="column" align="center" justify="center" mt={'150px'}>
+                <Heading>JourneyApp</Heading>
+                <Text textAlign={'center'} mt='4'><br /> 
+                App where you can view city bike journeys and stations <br /></Text>
+                <Stack direction="column" spacing={2} mt='15px'>
+                        <NavLink to="/journeys">
+                            <Button w={'100%'} colorScheme={'twitter'} >
+                                <Text>JOURNEYS</Text>
+                            </Button>
+                        </NavLink>
+                        <NavLink to="/stations">
+                            <Button w={'100%'} colorScheme={'twitter'} >
+                                <Text>STATIONS</Text>
+                            </Button>
+                        </NavLink>
+                </Stack>
             </Flex>
         </>
     );

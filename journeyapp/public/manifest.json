@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "JourneyApp",
+  "name": "JourneyApp - A simple app to track city bike journeys",
   "icons": [
     {
       "src": "favicon.ico",

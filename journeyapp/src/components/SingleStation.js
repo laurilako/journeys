@@ -5,7 +5,6 @@ import {
     StatNumber,
     Text,
     Spinner,
-    Box,
     StatGroup,
     Heading,
     AspectRatio
@@ -15,14 +14,13 @@ import { TileLayer } from 'react-leaflet/TileLayer'
 import { Marker, Popup } from 'react-leaflet';
 import { Icon } from 'leaflet';
 import '../../node_modules/leaflet/dist/leaflet.css';
-// Component to show the number of started and ended journeys at a station
 const SingleStation = ({ stations, id }) => {  
     const [stationJourneyData, setStationJourneyData] = useState([]);
     const station = stations.find(station => station.stationId === id);
 
     useEffect(() => {
         const fetchStationJourneyData = async () => {
-            const response = await fetch(`http://localhost:3000/api/journeys/station/${station.stationId}`);
+            const response = await fetch(`/journeys/station/${station.stationId}`);
             const data = await response.json();
             setStationJourneyData(data);
         }
@@ -69,8 +67,8 @@ const SingleStation = ({ stations, id }) => {
                         <StatNumber>{stationJourneyData.returnStationDistance} km</StatNumber>
                     </Stat>
                 </StatGroup>
-                <AspectRatio ratio={1}>
-                <MapContainer center={[station.y, station.x]} zoom={12} scrollWheelZoom={false}>       
+                <AspectRatio mt='3' ratio={1}>
+                <MapContainer center={[station.y, station.x]} zoom={15} scrollWheelZoom={false}>       
                     <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'/>

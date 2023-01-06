@@ -14,7 +14,7 @@ function App() {
   // fetch journeys from backend only on first render
   useEffect(() => {
     const fetchJourneys = async () => {
-      const response = await fetch('http://localhost:3000/api/journeys');
+      const response = await fetch('/api/journeys');
       const data = await response.json();
       setJourneys(data);
     }
@@ -26,7 +26,7 @@ function App() {
   // fetch stations from backend only on first render
   useEffect(() => {
     const fetchStations = async () => {
-      const response = await fetch('http://localhost:3000/api/stations');
+      const response = await fetch('/api/stations');
       const data = await response.json();
       setStations(data);
     }
