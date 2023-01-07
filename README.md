@@ -1,8 +1,11 @@
 ## Journeys app
+API, backend source in /journey/
 
-App running on cloud (Fly.io)<Br/>
+Front (Client) source in /journeyapp/<Br/>
+- Production build in /journey/, which is deployed to cloud.
 
-[App](https://proud-night-7676.fly.dev/)
+
+### Live App [Here](https://proud-night-7676.fly.dev/)
 
 ### Prerequisites: 
 None, live app [here](https://proud-night-7676.fly.dev/).
