@@ -1,13 +1,8 @@
-# Journeys
-
 ## Journeys app
 
-TODO: small devblog here
+App running on cloud (Fly.io)<Br/>
 
-
-
-
-https://proud-night-7676.fly.dev/
+[App](https://proud-night-7676.fly.dev/)
 
 ### Prerequisites: 
 None, live app [here](https://proud-night-7676.fly.dev/).
@@ -16,10 +11,13 @@ None, live app [here](https://proud-night-7676.fly.dev/).
 None
 
 ### Technology choices:
+I made my technology choices based on what I had the most experience with, and with technologies that I thought the API was possible to implement.
+
+### Backend, API
 Node.JS (Express), MongoDB
-
+<Br/>Also studied a bit how to implement with PostgresSQL, but since Heroku does not support free plans anymore, I went for Mongo.
+### Frontend
 React
-
 ChakraUI for React
 
 ###
