@@ -14,7 +14,7 @@ None, live app [here](https://proud-night-7676.fly.dev/).
 None
 
 ### Technology choices:
-I made my technology choices based on what I had the most experience with, and with technologies that I thought the API was possible to implement.
+I made my technology choices based on what I had the most experience with, and with technologies that I thought the API was possible to be implemented with.
 
 ### Backend, API
 Node.JS (Express), MongoDB
